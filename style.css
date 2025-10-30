@@ -1,7 +1,12 @@
+/* === GLOBAL STYLES === */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -12,36 +17,7 @@ body {
     overflow-x: hidden;
 }
 
-.process-stage {
-  opacity: 0;
-  transform: translateY(80px);
-  transition: all 1s ease-out;
-}
-
-.process-stage--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.process-stage--left {
-  transform: translateX(-80px);
-}
-.process-stage--right {
-  transform: translateX(80px);
-}
-
-.process-stage--left.process-stage--visible,
-.process-stage--right.process-stage--visible {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-/* Чтобы всё выглядело плавно */
-html {
-  scroll-behavior: smooth;
-}
-
-
+/* === HEADER === */
 .header {
   padding: 80px 20px 60px;
   background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
@@ -63,12 +39,6 @@ html {
   text-shadow: 0 0 15px rgba(88, 166, 255, 0.4);
 }
 
-@media (max-width: 768px) {
-  .header__title {
-    margin-left: 0px;
-  }
-}
-
 .header__description {
   font-size: 1.2em;
   line-height: 1.8;
@@ -80,30 +50,7 @@ html {
   margin-right: auto;
 }
 
-@media (max-width: 768px) {
-  .header {
-    padding: 60px 15px 40px;
-  }
-  .header__title {
-    font-size: 2.8em;
-  }
-  .header__description {
-    font-size: 1.1em;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    padding: 40px 10px 30px;
-  }
-  .header__title {
-    font-size: 2.2em;
-  }
-  .header__description {
-    font-size: 1em;
-  }
-}
-
+/* === PROCESS STAGES SECTION === */
 .process-stages {
     padding: 100px 20px;
     position: relative;
@@ -132,6 +79,7 @@ html {
     z-index: 0;
 }
 
+/* === PROCESS STAGE === */
 .process-stage {
     display: flex;
     align-items: center;
@@ -139,12 +87,42 @@ html {
     margin-bottom: 120px;
     position: relative;
     z-index: 1;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 1s ease-out;
 }
 
 .process-stage:last-child {
     margin-bottom: 0;
 }
 
+/* === PROCESS STAGE MODIFIERS === */
+.process-stage--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-stage--left {
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-left: 0;
+  transform: translateX(-80px);
+}
+
+.process-stage--right {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  padding-right: 0;
+  transform: translateX(80px);
+}
+
+.process-stage--left.process-stage--visible,
+.process-stage--right.process-stage--visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* === PROCESS STAGE INNER ELEMENTS === */
 .process-stage__content {
     flex: 1;
     padding: 0 40px;
@@ -191,48 +169,6 @@ html {
     z-index: 2;
 }
 
-.process-stage--left {
-    justify-content: flex-start;
-    flex-direction: row;
-    padding-left: 0;
-}
-
-.process-stage--left .process-stage__content {
-    text-align: left;
-    margin-left: 120px;
-}
-
-.process-stage--left .process-stage__image-wrapper {
-    order: -1;
-    margin-right: 20px;
-}
-
-.process-stage--left .process-stage__number {
-    left: calc(50% - 45px);
-    right: auto;
-}
-
-.process-stage--right {
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-    padding-right: 0;
-}
-
-.process-stage--right .process-stage__content {
-    text-align: right;
-    margin-right: 120px;
-}
-
-.process-stage--right .process-stage__image-wrapper {
-    order: -1;
-    margin-left: 20px;
-}
-
-.process-stage--right .process-stage__number {
-    left: calc(50% - 45px);
-    right: auto;
-}
-
 .process-stage__title {
     font-size: 38px;
     font-weight: 700;
@@ -250,6 +186,38 @@ html {
     width: auto;
 }
 
+/* === LEFT & RIGHT SPECIFIC LAYOUTS === */
+.process-stage--left .process-stage__content {
+    text-align: left;
+    margin-left: 120px;
+}
+
+.process-stage--left .process-stage__image-wrapper {
+    order: -1;
+    margin-right: 20px;
+}
+
+.process-stage--left .process-stage__number {
+    left: calc(50% - 45px);
+    right: auto;
+}
+
+.process-stage--right .process-stage__content {
+    text-align: right;
+    margin-right: 120px;
+}
+
+.process-stage--right .process-stage__image-wrapper {
+    order: -1;
+    margin-left: 20px;
+}
+
+.process-stage--right .process-stage__number {
+    left: calc(50% - 45px);
+    right: auto;
+}
+
+/* === MEDIA QUERIES === */
 @media (max-width: 1200px) {
     .process-stages__container::before {
         left: 50%;
@@ -289,10 +257,12 @@ html {
         margin: 40px auto 0 auto;
         text-align: center;
     }
+
     .process-stage--left .process-stage__image-wrapper,
     .process-stage--right .process-stage__image-wrapper {
         margin: 0 auto;
     }
+
     .process-stage--left .process-stage__number,
     .process-stage--right .process-stage__number {
         left: auto;
@@ -302,53 +272,89 @@ html {
     .process-stage__title {
         font-size: 32px;
     }
+
     .process-stage__description {
         font-size: 16px;
     }
 }
 
 @media (max-width: 768px) {
+    .header {
+      padding: 60px 15px 40px;
+    }
+
+    .header__title {
+      font-size: 2.8em;
+      margin-left: 0px;
+    }
+
+    .header__description {
+      font-size: 1.1em;
+    }
+
     .process-stages {
         padding: 60px 15px;
     }
+
     .process-stage {
         margin-bottom: 60px;
     }
+
     .process-stage__number {
         width: 80px;
         height: 80px;
         font-size: 22px;
         margin-bottom: 25px;
     }
+
     .process-stage__title {
         font-size: 28px;
     }
+
     .process-stage__description {
         font-size: 15px;
     }
 }
 
 @media (max-width: 480px) {
+    .header {
+      padding: 40px 10px 30px;
+    }
+
+    .header__title {
+      font-size: 2.2em;
+    }
+
+    .header__description {
+      font-size: 1em;
+    }
+
     .process-stages {
         padding: 40px 10px;
     }
+
     .process-stage {
         margin-bottom: 40px;
     }
+
     .process-stage__number {
         width: 70px;
         height: 70px;
         font-size: 20px;
         margin-bottom: 20px;
     }
+
     .process-stage__title {
         font-size: 24px;
     }
+
     .process-stage__description {
         font-size: 14px;
     }
+
     .process-stage__image-wrapper {
         max-width: 95%;
     }
 }
+
 
