@@ -12,6 +12,36 @@ body {
     overflow-x: hidden;
 }
 
+.process-stage {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1s ease-out;
+}
+
+.process-stage--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-stage--left {
+  transform: translateX(-80px);
+}
+.process-stage--right {
+  transform: translateX(80px);
+}
+
+.process-stage--left.process-stage--visible,
+.process-stage--right.process-stage--visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Чтобы всё выглядело плавно */
+html {
+  scroll-behavior: smooth;
+}
+
+
 .header {
   padding: 80px 20px 60px;
   background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);

@@ -104,5 +104,29 @@
             </div>
         </div>
     </section>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const stages = document.querySelectorAll(".process-stage");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("process-stage--visible");
+          }
+        });
+      }, { threshold: 0.3 });
+
+      stages.forEach((stage) => observer.observe(stage));
+      
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "PageDown" || e.key === "ArrowDown") {
+          window.scrollBy({ top: window.innerHeight * 0.9, behavior: "smooth" });
+        }
+        if (e.key === "PageUp" || e.key === "ArrowUp") {
+          window.scrollBy({ top: -window.innerHeight * 0.9, behavior: "smooth" });
+        }
+      });
+    });
+</script>
 </body>
 </html>
